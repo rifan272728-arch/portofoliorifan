@@ -1,0 +1,55 @@
+.css/* SCROLLBAR GRADASI */
+html { scrollbar-width: thin; scrollbar-color: #6ee7ff #0b0f1a; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0b0f1a; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--a, #6ee7ff), var(--b, #a78bfa));
+  border-radius: 10px;
+}
+
+/* WARNA SAAT TEKS DIBLOK */
+::selection { background: var(--b, #a78bfa); color: white; }
+
+/* HALAMAN MUNCUL PELAN */
+body { animation: hias-masuk 0.9s ease; }
+@keyframes hias-masuk { from { opacity: 0; } to { opacity: 1; } }
+
+/* BOLA CAHAYA BURAM DI LATAR */
+.hias-blob {
+  position: fixed; width: 420px; height: 420px; border-radius: 50%;
+  filter: blur(90px); opacity: 0.22; pointer-events: none; z-index: -3;
+  animation: hias-gerak 18s ease-in-out infinite alternate;
+}
+.hias-blob1 { top: -120px; left: -120px; background: var(--a, #6ee7ff); }
+.hias-blob2 { bottom: -140px; right: -120px; background: var(--b, #a78bfa); animation-delay: -6s; }
+.hias-blob3 { top: 40%; left: 55%; background: #f472b6; opacity: 0.12; animation-delay: -12s; }
+@keyframes hias-gerak {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(80px, 60px) scale(1.25); }
+}
+
+/* JEJAK KILAUAN MOUSE DAN LEDAKAN KLIK */
+.hias-jejak, .hias-partikel {
+  position: fixed; pointer-events: none; z-index: 9999; border-radius: 50%;
+}
+.hias-jejak {
+  background: var(--a, #6ee7ff);
+  box-shadow: 0 0 10px var(--a, #6ee7ff);
+}
+
+/* KILAU LEWAT DI TOMBOL SAAT DISENTUH */
+.tombol, .kembali, .kartu button { position: relative; overflow: hidden; }
+.tombol::before, .kembali::before, .kartu button::before {
+  content: ""; position: absolute; top: 0; left: -80%; width: 50%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: skewX(-20deg); pointer-events: none;
+}
+.tombol:hover::before, .kembali:hover::before, .kartu button:hover::before {
+  animation: hias-kilau 0.8s;
+}
+@keyframes hias-kilau { to { left: 140%; } }
+
+/* UNTUK PENGGUNA YANG TIDAK SUKA GERAKAN */
+@media (prefers-reduced-motion: reduce) {
+  .hias-blob, body { animation: none; }
+}

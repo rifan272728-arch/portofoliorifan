@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio Rifan</title>
+  <script>document.documentElement.classList.add("js");</script>
+  <style>
+    :root { --a: #6ee7ff; --b: #a78bfa; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0b0f1a; color: #e6e9f2;
+      font-family: "Segoe UI", Arial, sans-serif;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    /* LAYAR PEMBUKA */
+    #muat {
+      position: fixed; inset: 0; background: #0b0f1a; z-index: 100;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      animation: hilang 0.6s 2.4s forwards;
+    }
+    #muat .logo-muat { font-size: 48px; font-weight: bold; color: var(--a); letter-spacing: 4px; }
+    #muat .garis { width: 200px; height: 4px; background: #1f2740; margin-top: 20px; border-radius: 4px; overflow: hidden; }
+    #muat .garis div { height: 100%; width: 0; background: linear-gradient(90deg, var(--a), var(--b)); animation: isi 2s forwards; }
+    @keyframes isi { to { width: 100%; } }
+    @keyframes hilang { to { opacity: 0; visibility: hidden; } }
+
+    /* LATAR, CAHAYA, PROGRES */
+    #bintang { position: fixed; inset: 0; z-index: -1; }
+    #cahaya {
+      position: fixed; width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(110,231,255,0.15), transparent 70%);
+      pointer-events: none; transform: translate(-50%, -50%); z-index: 0;
+    }
+    #progres {
+      position: fixed; top: 0; left: 0; height: 4px; width: 0;
+      background: linear-gradient(90deg, var(--a), var(--b), #f472b6); z-index: 20;
+    }
+
+    /* MENU */
+    nav {
+      position: sticky; top: 0; display: flex; justify-content: space-between;
+      align-items: center; padding: 15px 8%; flex-wrap: wrap; gap: 10px;
+      background: rgba(11,15,26,0.85); backdrop-filter: blur(10px);
+      border-bottom: 1px solid #1f2740; z-index: 10;
+    }
+    nav .logo { font-weight: bold; font-size: 22px; color: var(--a); }
+    nav a { color: inherit; text-decoration: none; margin-left: 20px; transition: 0.3s; }
+    nav a:hover { color: var(--a); }
+    #tema {
+      margin-left: 20px; background: none; border: 1px solid #1f2740; color: inherit;
+      border-radius: 50%; width: 40px; height: 40px; font-size: 18px; cursor: pointer; transition: 0.3s;
+    }
+    #tema:hover { transform: rotate(20deg) scale(1.15); border-color: var(--a); }
+
+    /* PEMILIH WARNA */
+    #warna {
+      position: fixed; left: 20px; bottom: 25px; display: flex; gap: 10px; z-index: 15;
+      background: rgba(19,26,46,0.85); padding: 10px 14px; border-radius: 30px; border: 1px solid #1f2740;
+    }
+    #warna button {
+      width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; cursor: pointer; transition: 0.3s;
+    }
+    #warna button:hover { transform: scale(1.3); }
+
+    /* HERO */
+    .hero {
+      min-height: 90vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center; padding: 20px;
+      position: relative; z-index: 1;
+    }
+    .foto-bungkus { position: relative; width: 180px; height: 180px; }
+    .foto-bungkus::before {
+      content: ""; position: absolute; inset: -10px; border-radius: 50%;
+      background: conic-gradient(var(--a), var(--b), #f472b6, var(--a));
+      animation: putar 4s linear infinite; filter: blur(6px);
+    }
+    @keyframes putar { to { transform: rotate(360deg); } }
+    .hero img {
+      position: relative; width: 180px; height: 180px; object-fit: cover; border-radius: 50%;
+      border: 4px solid #0b0f1a; animation: melayang 3s ease-in-out infinite;
+    }
+    @keyframes melayang { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 70px); margin: 30px 0 10px;
+      background: linear-gradient(90deg, var(--a), var(--b), #f472b6, var(--a));
+      background-size: 300% 100%; animation: geser 6s linear infinite;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    @keyframes geser { to { background-position: 300% 0; } }
+    .hero p { font-size: 20px; color: #9aa4c0; min-height: 30px; }
+    .tombol {
+      display: inline-block; margin: 30px 8px 0; padding: 14px 34px; border: none; cursor: pointer;
+      background: linear-gradient(90deg, var(--a), var(--b)); color: #0b0f1a; font-size: 16px;
+      font-weight: bold; text-decoration: none; border-radius: 30px; transition: 0.3s;
+    }
+    .tombol:hover { transform: scale(1.08); box-shadow: 0 0 25px var(--b); }
+    .tombol.garis { background: none; color: var(--a); border: 2px solid var(--a); }
+
+    /* STATISTIK */
+    .statistik { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 0 8% 20px; position: relative; z-index: 1; }
+    .stat { width: 200px; padding: 25px; text-align: center; background: #131a2e; border: 1px solid #1f2740; border-radius: 18px; }
+    .stat b { display: block; font-size: 42px; color: var(--a); }
+    .stat span { color: #9aa4c0; }
+
+    /* BAGIAN */
+    section { padding: 70px 8%; position: relative; z-index: 1; }
+    section h2 { text-align: center; font-size: 34px; margin-bottom: 40px; color: var(--a); }
+    .wadah { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
+    .kartu {
+      width: 280px; padding: 30px 25px; background: #131a2e; border: 1px solid #1f2740;
+      border-radius: 18px; text-align: center; transition: border-color 0.3s, box-shadow 0.3s;
+      text-decoration: none; color: inherit; display: block;
+    }
+    .kartu:hover { border-color: var(--a); box-shadow: 0 10px 30px rgba(110,231,255,0.25); }
+    .kartu .ikon { font-size: 45px; margin-bottom: 15px; }
+    .kartu h3 { margin-bottom: 10px; }
+    .kartu p { color: #9aa4c0; }
+
+    /* SKILL */
+    .skill { max-width: 600px; margin: 0 auto 22px; }
+    .skill .label { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .skill .jalur { height: 14px; background: #1f2740; border-radius: 10px; overflow: hidden; }
+    .skill .isi { height: 100%; width: 0; border-radius: 10px; background: linear-gradient(90deg, var(--a), var(--b)); transition: width 1.5s ease; }
+
+    /* LIGHTBOX */
+    #lightbox {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none;
+      justify-content: center; align-items: center; z-index: 50; cursor: zoom-out;
+    }
+    #lightbox.buka { display: flex; }
+    #lightbox img { max-width: 90%; max-height: 90%; border-radius: 12px; animation: zoom 0.3s; }
+    @keyframes zoom { from { transform: scale(0.6); opacity: 0; } }
+
+    /* KUTIPAN */
+    .kutipan { max-width: 600px; margin: auto; text-align: center; min-height: 110px; }
+    .kutipan p { font-size: 22px; font-style: italic; transition: opacity 0.5s; }
+    .kutipan small { color: var(--b); display: block; margin-top: 12px; }
+
+    /* PERJALANAN */
+    .garis-waktu { max-width: 600px; margin: auto; border-left: 3px solid var(--a); padding-left: 30px; }
+    .langkah { position: relative; margin-bottom: 35px; }
+    .langkah::before {
+      content: ""; position: absolute; left: -41px; top: 4px; width: 17px; height: 17px;
+      background: #0b0f1a; border: 3px solid var(--b); border-radius: 50%;
+    }
+    .langkah h3 { color: var(--b); margin-bottom: 5px; }
+    .langkah p { color: #9aa4c0; }
+
+    /* FORM KONTAK */
+    form { max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 14px; }
+    input, textarea {
+      padding: 14px 18px; border-radius: 12px; border: 1px solid #1f2740; background: #131a2e;
+      color: inherit; font-size: 16px; font-family: inherit; outline: none; transition: 0.3s;
+    }
+    input:focus, textarea:focus { border-color: var(--a); box-shadow: 0 0 15px rgba(110,231,255,0.3); }
+    textarea { min-height: 120px; resize: vertical; }
+
+    /* MUNCUL */
+    .js .muncul { opacity: 0; transform: translateY(40px); transition: opacity 0.8s, transform 0.8s; }
+    .js .muncul.tampil { opacity: 1; transform: translateY(0); }
+
+    /* TOMBOL ATAS */
+    #atas {
+      position: fixed; right: 25px; bottom: 25px; width: 50px; height: 50px; border-radius: 50%;
+      border: none; font-size: 22px; cursor: pointer; color: #0b0f1a;
+      background: linear-gradient(135deg, var(--a), var(--b));
+      opacity: 0; pointer-events: none; transition: 0.3s; z-index: 15;
+    }
+    #atas.nampak { opacity: 1; pointer-events: auto; }
+    #atas:hover { transform: translateY(-5px); }
+
+    footer { text-align: center; padding: 30px; color: #6b7694; border-top: 1px solid #1f2740; position: relative; z-index: 1; }
+
+    /* KARTU PROYEK */
+    .proyek-kartu { width: 320px; padding: 0; overflow: hidden; text-align: left; }
+    .proyek-atas {
+      height: 140px; display: flex; justify-content: center; align-items: center;
+      font-size: 64px; transition: 0.4s;
+      background: linear-gradient(var(--sudut), var(--a), var(--b));
+    }
+    .proyek-kartu:hover .proyek-atas { font-size: 78px; }
+    .proyek-isi { padding: 22px 24px 26px; }
+    .proyek-isi h3 { font-size: 21px; margin: 12px 0 8px; }
+    .proyek-isi ul { list-style: none; margin: 14px 0; }
+    .proyek-isi li { padding: 4px 0; color: #9aa4c0; font-size: 15px; }
+    .proyek-isi li::before { content: "✦ "; color: var(--a); }
+    .status {
+      display: inline-block; font-size: 12px; padding: 4px 12px; border-radius: 20px;
+      background: rgba(74,222,128,0.15); color: #4ade80;
+    }
+    .label-tek { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .label-tek span {
+      font-size: 12px; padding: 4px 12px; border-radius: 20px;
+      border: 1px solid var(--b); color: var(--b);
+    }
+    .buka-proyek { font-weight: bold; color: var(--a); transition: 0.3s; }
+    .proyek-kartu:hover .buka-proyek { letter-spacing: 1px; }
+    body.terang .proyek-isi li { color: #55607f; }
+
+    /* GALERI: semua foto sama ukuran, simpel */
+    .galeri {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .galeri figure {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid #1f2740;
+      cursor: zoom-in;
+      transition: border-color 0.3s, box-shadow 0.3s, opacity 0.8s, transform 0.8s;
+    }
+    .galeri figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s;
+    }
+    .galeri figure:hover img { transform: scale(1.08); }
+    .galeri figure:hover { border-color: var(--a); box-shadow: 0 10px 30px rgba(110, 231, 255, 0.25); }
+    .galeri figcaption {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 28px 16px 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+    }
+
+    /* MODE TERANG */
+    body.terang { background: #f2f5fb; color: #1b2238; }
+    body.terang nav { background: rgba(242,245,251,0.85); border-color: #d9dfee; }
+    body.terang .kartu, body.terang .stat, body.terang input, body.terang textarea, body.terang #warna { background: white; border-color: #d9dfee; }
+    body.terang .hero p, body.terang .kartu p, body.terang .stat span, body.terang .langkah p { color: #55607f; }
+    body.terang .skill .jalur { background: #d9dfee; }
+    body.terang .langkah::before, body.terang .hero img { background: #f2f5fb; border-color: #f2f5fb; }
+    body.terang footer { border-color: #d9dfee; }
+    body.terang .galeri figure { border-color: #d9dfee; }
+  </style>
+  <link rel="stylesheet" href="hias.css">
+</head>
+<body>
+
+  <div id="muat">
+    <div class="logo-muat">RIFAN</div>
+    <div class="garis"><div></div></div>
+  </div>
+
+  <div id="progres"></div>
+  <div id="cahaya"></div>
+  <canvas id="bintang"></canvas>
+
+  <div id="warna" title="Ganti warna tema">
+    <button style="background:#6ee7ff" data-a="#6ee7ff" data-b="#a78bfa"></button>
+    <button style="background:#ff4d6d" data-a="#ff4d6d" data-b="#ffb347"></button>
+    <button style="background:#4ade80" data-a="#4ade80" data-b="#22d3ee"></button>
+    <button style="background:#f472b6" data-a="#f472b6" data-b="#a78bfa"></button>
+  </div>
+
+  <nav>
+    <div class="logo">Rifan.</div>
+    <div>
+      <a href="#tentang">Tentang</a>
+      <a href="#skill">Skill</a>
+      <a href="#proyek">Proyek</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#kontak">Kontak</a>
+      <button id="tema" title="Ganti tema">🌙</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="foto-bungkus"><img src="fotoku.jpg.jpg" alt="Foto Rifan"></div>
+    <h1>Halo, saya Rifan</h1>
+    <p id="ketik"></p>
+    <div>
+      <a href="#proyek" class="tombol">Lihat Proyek</a>
+      <a href="#kontak" class="tombol garis">Hubungi Saya</a>
+    </div>
+  </div>
+
+  <div class="statistik">
+    <div class="stat muncul"><b data-target="3">0</b><span>Bahasa dipelajari</span></div>
+    <div class="stat muncul"><b data-target="7">0</b><span>Halaman dibuat</span></div>
+    <div class="stat muncul"><b data-target="100">0</b><span>% semangat</span></div>
+  </div>
+
+  <section id="tentang">
+    <h2>Tentang Saya</h2>
+    <p class="muncul" style="text-align:center; max-width:600px; margin:auto; opacity:.8;">
+      Saya sedang belajar membuat website dengan HTML, CSS, dan JavaScript.
+      Setiap hari saya mencoba hal baru dan membuat sesuatu yang keren.
+    </p>
+  </section>
+
+  <section id="skill">
+    <h2>Kemampuan</h2>
+    <div class="skill muncul"><div class="label"><span>HTML</span><span>80%</span></div><div class="jalur"><div class="isi" data-nilai="80"></div></div></div>
+    <div class="skill muncul"><div class="label"><span>CSS</span><span>70%</span></div><div class="jalur"><div class="isi" data-nilai="70"></div></div></div>
+    <div class="skill muncul"><div class="label"><span>JavaScript</span><span>50%</span></div><div class="jalur"><div class="isi" data-nilai="50"></div></div></div>
+  </section>
+
+  <section id="proyek">
+    <h2>Proyek Saya</h2>
+    <div class="wadah">
+
+      <a class="kartu proyek-kartu muncul" href="index.html">
+        <div class="proyek-atas" style="--sudut:135deg">🌐</div>
+        <div class="proyek-isi">
+          <span class="status">✔ Selesai</span>
+          <h3>Website Pertama</h3>
+          <p>Halaman perkenalan pertamaku, dibuat dari nol dengan VS Code.</p>
+          <ul>
+            <li>Foto profil dan daftar hobi</li>
+            <li>Link ke halaman lain</li>
+            <li>Tombol penghitung klik</li>
+          </ul>
+          <div class="label-tek"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <div class="buka-proyek">Buka proyek →</div>
+        </div>
+      </a>
+
+      <a class="kartu proyek-kartu muncul" href="animasi.html">
+        <div class="proyek-atas" style="--sudut:225deg">✨</div>
+        <div class="proyek-isi">
+          <span class="status">✔ Selesai</span>
+          <h3>Koleksi Animasi</h3>
+          <p>Eksperimen animasi bertema coding supaya halaman terasa hidup.</p>
+          <ul>
+            <li>Hujan kode dan editor mengetik sendiri</li>
+            <li>Kartu bahasa yang berputar 3D</li>
+            <li>Simbol kode melayang</li>
+          </ul>
+          <div class="label-tek"><span>CSS Animation</span><span>JavaScript</span></div>
+          <div class="buka-proyek">Buka proyek →</div>
+        </div>
+      </a>
+
+      <a class="kartu proyek-kartu muncul" href="belajar.html">
+        <div class="proyek-atas" style="--sudut:45deg">🃏</div>
+        <div class="proyek-isi">
+          <span class="status">✔ Selesai</span>
+          <h3>Kartu Teman</h3>
+          <p>Latihan menata beberapa kartu agar rapi di laptop maupun HP.</p>
+          <ul>
+            <li>Layout fleksibel dengan Flexbox</li>
+            <li>Efek naik saat disentuh mouse</li>
+            <li>Otomatis turun ke bawah di layar kecil</li>
+          </ul>
+          <div class="label-tek"><span>HTML</span><span>CSS Flexbox</span></div>
+          <div class="buka-proyek">Buka proyek →</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section id="galeri">
+    <h2>Galeri</h2>
+    <div class="galeri">
+      <figure class="muncul">
+        <img src="fotoku1.jpg" alt="Foto 1">
+        <figcaption>supreme</figcaption>
+      </figure>
+      <figure class="muncul">
+        <img src="fotoku2.jpg" alt="Foto 2">
+        <figcaption>detik" global</figcaption>
+      </figure>
+      <figure class="muncul">
+        <img src="fotoku3.jpg" alt="Foto 3">
+        <figcaption>angka togel</figcaption>
+      </figure>
+      <figure class="muncul">
+        <img src="fotoku4.jpg" alt="Foto 4">
+        <figcaption>naruto!!</figcaption>
+      </figure>
+      <figure class="muncul">
+        <img src="fotoku5.jpg" alt="Foto 5">
+        <figcaption>imokk</figcaption>
+      </figure>
+      <figure class="muncul">
+        <img src="fotoku6.jpg" alt="Foto 6">
+        <figcaption>w friends</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="hobi">
+    <h2>Hobi Saya</h2>
+    <div class="wadah">
+      <div class="kartu muncul"><div class="ikon">🎮</div><h3>Bermain Game</h3><p>Melatih strategi dan kerja sama tim.</p></div>
+      <div class="kartu muncul"><div class="ikon">🏐</div><h3>Bermain Voli</h3><p>Olahraga favorit bersama teman.</p></div>
+      <div class="kartu muncul"><div class="ikon">💻</div><h3>Belajar Coding</h3><p>Semangat membuat website sendiri.</p></div>
+    </div>
+  </section>
+
+  <section id="motivasi">
+    <h2>Semangat Hari Ini</h2>
+    <div class="kutipan"><p id="teks-kutipan"></p><small id="sumber-kutipan"></small></div>
+  </section>
+
+  <section id="perjalanan">
+    <h2>Perjalanan Belajar</h2>
+    <div class="garis-waktu">
+      <div class="langkah muncul"><h3>Install VS Code</h3><p>Mulai dari nol dan menyiapkan alat.</p></div>
+      <div class="langkah muncul"><h3>Belajar HTML</h3><p>Membuat judul, gambar, link, dan daftar.</p></div>
+      <div class="langkah muncul"><h3>Belajar CSS</h3><p>Warna, layout, dan animasi.</p></div>
+      <div class="langkah muncul"><h3>Belajar JavaScript</h3><p>Tombol yang bisa bereaksi.</p></div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <h2>Kontak</h2>
+    <form id="form" class="muncul">
+      <input id="nama" placeholder="Nama kamu" required>
+      <textarea id="pesan" placeholder="Tulis pesanmu..." required></textarea>
+      <button type="submit" class="tombol" style="margin:0">Kirim lewat WhatsApp</button>
+    </form>
+  </section>
+
+  <footer>© 2026 Rifan. Dibuat dengan HTML, CSS, dan JavaScript.</footer>
+
+  <div id="lightbox"><img id="besar" alt="Foto besar"></div>
+  <button id="atas" title="Ke atas">↑</button>
+
+  <script>
+    // LAYAR PEMBUKA
+    addEventListener("load", () => {
+      const m = document.getElementById("muat");
+      setTimeout(() => { m.style.opacity = 0; m.style.visibility = "hidden"; }, 1200);
+    });
+
+    // TEKS MENGETIK BERGANTI-GANTI
+    const daftarKata = ["Pelajar", "Pembuat website", "Pembelajar cepat"];
+    let k = 0, h = 0, hapus = false;
+    function ketik() {
+      const kata = daftarKata[k];
+      h += hapus ? -1 : 1;
+      document.getElementById("ketik").innerText = kata.slice(0, h) + "|";
+      let jeda = hapus ? 40 : 90;
+      if (!hapus && h === kata.length) { hapus = true; jeda = 1200; }
+      else if (hapus && h === 0) { hapus = false; k = (k + 1) % daftarKata.length; jeda = 300; }
+      setTimeout(ketik, jeda);
+    }
+    ketik();
+
+    // MUNCUL SAAT SCROLL + BAR SKILL + HITUNGAN
+    function hitung(el) {
+      const target = +el.dataset.target; let n = 0;
+      const t = setInterval(() => {
+        n += Math.ceil(target / 40);
+        if (n >= target) { n = target; clearInterval(t); }
+        el.innerText = n;
+      }, 40);
+    }
+    const pengamat = new IntersectionObserver((daftar) => {
+      daftar.forEach(item => {
+        if (!item.isIntersecting) return;
+        const el = item.target;
+        el.classList.add("tampil");
+        el.querySelectorAll(".isi").forEach(b => b.style.width = b.dataset.nilai + "%");
+        el.querySelectorAll("[data-target]").forEach(hitung);
+        pengamat.unobserve(el);
+      });
+    });
+    document.querySelectorAll(".muncul").forEach(el => pengamat.observe(el));
+
+    // GANTI TEMA TERANG/GELAP
+    const tombolTema = document.getElementById("tema");
+    tombolTema.onclick = () => {
+      document.body.classList.toggle("terang");
+      tombolTema.innerText = document.body.classList.contains("terang") ? "☀️" : "🌙";
+    };
+
+    // GANTI WARNA TEMA (tersimpan)
+    function pasangWarna(a, b) {
+      document.documentElement.style.setProperty("--a", a);
+      document.documentElement.style.setProperty("--b", b);
+      try { localStorage.setItem("warna", a + "|" + b); } catch (e) {}
+    }
+    document.querySelectorAll("#warna button").forEach(t => {
+      t.onclick = () => pasangWarna(t.dataset.a, t.dataset.b);
+    });
+    try {
+      const simpan = localStorage.getItem("warna");
+      if (simpan) pasangWarna(...simpan.split("|"));
+    } catch (e) {}
+
+    // LATAR BINTANG
+    const kanvas = document.getElementById("bintang");
+    const ctx = kanvas.getContext("2d");
+    function ukur() { kanvas.width = innerWidth; kanvas.height = innerHeight; }
+    ukur();
+    addEventListener("resize", ukur);
+    const bintang = Array.from({ length: 120 }, () => ({
+      x: Math.random() * innerWidth, y: Math.random() * innerHeight,
+      r: Math.random() * 1.8 + 0.3, v: Math.random() * 0.4 + 0.1
+    }));
+    function gambar() {
+      ctx.clearRect(0, 0, kanvas.width, kanvas.height);
+      const terang = document.body.classList.contains("terang");
+      ctx.fillStyle = terang ? "rgba(60,80,140,0.35)" : "rgba(255,255,255,0.8)";
+      bintang.forEach(b => {
+        ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2); ctx.fill();
+        b.y += b.v;
+        if (b.y > kanvas.height) { b.y = 0; b.x = Math.random() * kanvas.width; }
+      });
+      requestAnimationFrame(gambar);
+    }
+    gambar();
+
+    // CAHAYA MOUSE
+    const cahaya = document.getElementById("cahaya");
+    addEventListener("mousemove", e => {
+      cahaya.style.left = e.clientX + "px";
+      cahaya.style.top = e.clientY + "px";
+    });
+
+    // KARTU MIRING 3D
+    document.querySelectorAll(".kartu").forEach(kt => {
+      kt.addEventListener("mousemove", e => {
+        const r = kt.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        kt.style.transform = `perspective(600px) rotateY(${x * 20}deg) rotateX(${-y * 20}deg) translateY(-10px)`;
+      });
+      kt.addEventListener("mouseleave", () => { kt.style.transform = ""; });
+    });
+
+    // GALERI: pakai images.webp kalau foto belum ada, klik untuk membesarkan
+    const lightbox = document.getElementById("lightbox");
+    const besar = document.getElementById("besar");
+    document.querySelectorAll(".galeri img").forEach(g => {
+      g.onerror = () => { g.onerror = null; g.src = "images.webp"; };
+    });
+    document.querySelectorAll(".galeri figure").forEach(f => {
+      f.onclick = () => {
+        besar.src = f.querySelector("img").src;
+        lightbox.classList.add("buka");
+      };
+    });
+    lightbox.onclick = () => lightbox.classList.remove("buka");
+    addEventListener("keydown", e => { if (e.key === "Escape") lightbox.classList.remove("buka"); });
+
+    // KUTIPAN BERGANTI OTOMATIS
+    const kutipan = [
+      ["Setiap ahli dulunya pemula.", "Pepatah"],
+      ["Salah itu bagian dari belajar.", "Semangat coding"],
+      ["Sedikit demi sedikit, lama-lama jadi bukit.", "Peribahasa"],
+      ["Kode yang error hari ini, jadi pelajaran besok.", "Rifan"]
+    ];
+    let q = 0;
+    function tampilKutipan() {
+      const t = document.getElementById("teks-kutipan");
+      t.style.opacity = 0;
+      setTimeout(() => {
+        t.innerText = "“" + kutipan[q][0] + "”";
+        document.getElementById("sumber-kutipan").innerText = "— " + kutipan[q][1];
+        t.style.opacity = 1;
+        q = (q + 1) % kutipan.length;
+      }, 500);
+    }
+    tampilKutipan();
+    setInterval(tampilKutipan, 4000);
+
+    // FORM KONTAK -> WHATSAPP
+    // Ganti dengan nomormu (format 62, tanpa +). Nomor ini terlihat oleh pengunjung.
+    const NOMOR = "6289512157956";
+    document.getElementById("form").onsubmit = e => {
+      e.preventDefault();
+      const nama = document.getElementById("nama").value;
+      const pesan = document.getElementById("pesan").value;
+      const teks = encodeURIComponent("Halo Rifan, saya " + nama + ". " + pesan);
+      window.open("https://wa.me/" + NOMOR + "?text=" + teks, "_blank");
+    };
+
+    // PROGRES SCROLL + TOMBOL KE ATAS
+    const progres = document.getElementById("progres");
+    const atas = document.getElementById("atas");
+    addEventListener("scroll", () => {
+      const tinggi = document.documentElement.scrollHeight - innerHeight;
+      progres.style.width = (scrollY / tinggi * 100) + "%";
+      atas.classList.toggle("nampak", scrollY > 400);
+    });
+    atas.onclick = () => scrollTo({ top: 0, behavior: "smooth" });
+  </script>
+  <script src="hias.js"></script>
+</body>
+</html>

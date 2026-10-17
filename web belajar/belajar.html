@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kartu Teman</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      padding: 50px 20px;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: white;
+      text-align: center;
+      background: linear-gradient(135deg, #1b2a55, #0b0f1a 60%, #3b1d5a);
+    }
+    h1 {
+      font-size: clamp(30px, 6vw, 48px);
+      background: linear-gradient(90deg, #6ee7ff, #a78bfa, #f472b6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .sub { margin: 10px 0 40px; color: #9aa4c0; }
+
+    .wadah {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+    .kartu {
+      width: 230px;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 22px;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+    }
+    .kartu:hover {
+      transform: translateY(-12px);
+      border-color: var(--warna);
+      box-shadow: 0 15px 35px var(--warna);
+    }
+    .avatar {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 38px;
+      font-weight: bold;
+      color: #0b0f1a;
+      background: var(--warna);
+      transition: 0.3s;
+    }
+    .kartu:hover .avatar { transform: scale(1.12) rotate(-6deg); }
+    h2 { font-size: 22px; margin-bottom: 8px; }
+    .hobi {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      border: 1px solid var(--warna);
+      color: var(--warna);
+    }
+
+    .kembali {
+      display: inline-block;
+      margin-top: 50px;
+      padding: 12px 30px;
+      border: 2px solid #6ee7ff;
+      border-radius: 30px;
+      color: #6ee7ff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .kembali:hover { background: #6ee7ff; color: #0b0f1a; box-shadow: 0 0 25px #6ee7ff; }
+  </style>
+</head>
+<body>
+
+  <h1>Teman-temanku</h1>
+  <p class="sub">Orang-orang seru di sekitarku</p>
+
+  <div class="wadah">
+    <div class="kartu" style="--warna:#6ee7ff">
+      <div class="avatar">R</div>
+      <h2>Rifan</h2>
+      <span class="hobi">🏐 Bermain game</span>
+    </div>
+
+    <div class="kartu" style="--warna:#f472b6">
+      <div class="avatar">A</div>
+      <h2>Andi</h2>
+      <span class="hobi">🎮 Bermain voli</span>
+    </div>
+
+    <div class="kartu" style="--warna:#4ade80">
+      <div class="avatar">B</div>
+      <h2>Budi</h2>
+      <span class="hobi">📚 Belajar hal baru</span>
+    </div>
+  </div>
+
+  <a class="kembali" href="index.html.html">← Kembali ke Portofolio</a>
+
+</body>
+</html>
